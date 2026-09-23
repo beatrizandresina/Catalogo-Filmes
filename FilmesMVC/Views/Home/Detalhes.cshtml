@@ -1,0 +1,128 @@
+﻿@model FilmesMVC.Models.FilmeViewModel
+
+<div class="container mt-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-5">
+        <a href="/Home/Index" class="text-muted text-decoration-none d-flex align-items-center transition-hover">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+            <span class="ms-2 fw-medium">Voltar ao Catálogo</span>
+        </a>
+        <div class="d-flex w-100 justify-content-start justify-content-md-end gap-2">
+            <a href="/Home/Editar/@Model.Id" class="btn btn-outline-secondary rounded-pill px-4 flex-grow-1 flex-md-grow-0">Editar</a>
+            <a href="/Home/Excluir/@Model.Id" class="btn btn-outline-danger rounded-pill px-4 flex-grow-1 flex-md-grow-0">Excluir</a>
+        </div>
+    </div>
+
+    <div class="row mb-5 pb-4 border-bottom" style="border-color: var(--border-subtle) !important;">
+
+        <div class="col-md-4 col-lg-3 text-center text-md-start mb-4 mb-md-0">
+            @if (!string.IsNullOrEmpty(Model.CapaUrl))
+            {
+                <img src="@Model.CapaUrl" alt="Capa do filme @Model.Titulo" class="img-fluid rounded-4 shadow-lg w-100" style="object-fit: cover;" />
+            }
+            else
+            {
+                <div class="rounded-4 w-100 d-flex flex-column align-items-center justify-content-center text-muted" style="aspect-ratio: 2/3; background-color: var(--bg-card); border: 1px dashed var(--border-subtle);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-image mb-2 opacity-50" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+                    </svg>
+                    <span>Sem Pôster</span>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.TrailerUrl))
+            {
+                <a href="@Model.TrailerUrl" target="_blank" class="btn btn-primary btn-lg rounded-pill w-100 mt-4 d-flex align-items-center justify-content-center shadow-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-play-fill me-2" viewBox="0 0 16 16">
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                    </svg>
+                    Assistir Trailer
+                </a>
+            }
+        </div>
+
+        <div class="col-md-8 col-lg-9 ps-md-4 ps-lg-5">
+            <h1 class="fw-bold mb-1 display-5" style="letter-spacing: -1px; color: var(--text-primary);">@Model.Titulo</h1>
+            <p class="fs-5 mb-4" style="color: var(--text-muted);">Dirigido por <strong>@Model.Diretor</strong> &bull; @Model.AnoLancamento</p>
+
+            <div class="d-flex flex-wrap gap-3 mb-4">
+                <span class="badge d-flex align-items-center px-3 py-2 rounded-pill" style="background-color: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); font-weight: 500; font-size: 0.9rem;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-clock me-2 opacity-75" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" /><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" /></svg>
+                    @Model.DuracaoMinutos min
+                </span>
+
+                <span class="badge d-flex align-items-center px-3 py-2 rounded-pill" style="background-color: rgba(249, 65, 68, 0.1); border: 1px solid rgba(249, 65, 68, 0.3); color: var(--brand-red); font-weight: 600; font-size: 0.9rem;">
+                    Classificação: @Model.ClassificacaoIndicativa
+                </span>
+            </div>
+
+            <div class="mb-5">
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <strong class="me-2" style="color: var(--text-muted); font-weight: 500;">Gêneros:</strong>
+                    @if (Model.Generos != null && Model.Generos.Any())
+                    {
+                        foreach (var genero in Model.Generos)
+                        {
+                            <span class="badge rounded-pill px-3 py-2 fw-normal" style="background-color: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted);">
+                                @genero.Nome
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="small" style="color: var(--text-muted);">Nenhum gênero registrado.</span>
+                    }
+                    <a href="/Home/VincularGenero?filmeId=@Model.Id" class="badge rounded-pill px-3 py-2 text-decoration-none transition-hover" style="background-color: var(--bg-card); color: var(--brand-red); border: 1px dashed var(--border-subtle);">
+                        + Adicionar
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h5 class="fw-semibold mb-3" style="color: var(--text-primary);">Sinopse</h5>
+                <p style="color: var(--text-muted); line-height: 1.8; font-size: 1.05rem;">
+                    @(string.IsNullOrEmpty(Model.Sinopse) ? "Nenhuma sinopse disponível para este filme." : Model.Sinopse)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Avaliações do Público</h4>
+            <a href="/Home/AdicionarAvaliacao?filmeId=@Model.Id" class="btn btn-outline-secondary rounded-pill btn-sm px-4">
+                Escrever Avaliação
+            </a>
+        </div>
+
+        <div class="row g-4">
+            @if (Model.Avaliacoes != null && Model.Avaliacoes.Any())
+            {
+                foreach (var avaliacao in Model.Avaliacoes)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 p-4 rounded-4" style="background-color: var(--bg-card); border: 1px solid var(--border-subtle);">
+                            <div class="d-flex align-items-center mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#FFD700" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                </svg>
+                                <strong class="ms-2 fs-5 text-white">@avaliacao.Nota <span class="fs-6 fw-normal" style="color: var(--text-muted);">/ 5</span></strong>
+                            </div>
+                            <p class="mb-0" style="color: var(--text-muted); line-height: 1.6; font-style: italic;">"@avaliacao.Comentario"</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12">
+                    <div class="p-5 text-center rounded-4" style="background-color: var(--bg-card); border: 1px dashed var(--border-subtle);">
+                        <p class="mb-0" style="color: var(--text-muted);">Este filme ainda não tem nenhuma avaliação. Seja o primeiro a avaliar!</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

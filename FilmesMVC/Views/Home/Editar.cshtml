@@ -1,0 +1,84 @@
+﻿@model FilmesMVC.Models.FilmeViewModel
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="d-flex align-items-center">
+            <a href="/Home/Detalhes/@Model.Id" class="text-muted text-decoration-none me-3" title="Voltar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg>
+            </a>
+            <h1 class="mb-0">Editar Filme</h1>
+        </div>
+    </div>
+
+    <div class="p-4 p-md-5 rounded-4" style="background-color: var(--bg-card);">
+        <form asp-action="Editar" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <h5 class="mb-4" style="color: var(--brand-red) !important;">Informações Principais</h5>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Título do Filme <span class="text-danger">*</span></label>
+                    <input asp-for="Titulo" class="form-control form-control-lg" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Diretor <span class="text-danger">*</span></label>
+                    <input asp-for="Diretor" class="form-control form-control-lg" required />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Ano <span class="text-danger">*</span></label>
+                    <input asp-for="AnoLancamento" type="number" class="form-control form-control-lg" required min="1888" />
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Duração <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <input asp-for="DuracaoMinutos" type="number" class="form-control form-control-lg" required min="1" />
+                        <span class="input-group-text">min</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Classificação <span class="text-danger">*</span></label>
+                    <select asp-for="ClassificacaoIndicativa" class="form-select form-control-lg text-white" style="background-color: var(--bg-dark); border-color: var(--border-subtle);" required>
+                        <option value="" disabled>Selecione...</option>
+                        <option value="L">Livre</option>
+                        <option value="10">10 anos</option>
+                        <option value="12">12 anos</option>
+                        <option value="14">14 anos</option>
+                        <option value="16">16 anos</option>
+                        <option value="18">18 anos</option>
+                    </select>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Sinopse</label>
+                    <textarea asp-for="Sinopse" class="form-control" rows="5"></textarea>
+                </div>
+            </div>
+
+            <hr class="my-5" style="border-color: var(--border-subtle); opacity: 1;">
+
+            <h5 class="mb-4" style="color: var(--brand-red) !important;">Mídia e Links</h5>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">URL da Capa (Pôster)</label>
+                    <input asp-for="CapaUrl" class="form-control form-control-lg" placeholder="https://..." />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label text-muted fw-semibold small text-uppercase">URL do Trailer (YouTube)</label>
+                    <input asp-for="TrailerUrl" class="form-control form-control-lg" placeholder="https://..." />
+                </div>
+            </div>
+
+            <div class="d-flex flex-column-reverse flex-sm-row justify-content-sm-end align-items-stretch align-items-sm-center mt-5 pt-4 border-top gap-3" style="border-color: var(--border-subtle) !important;">
+                <a href="/Home/Detalhes/@Model.Id" class="btn btn-link text-muted text-decoration-none text-center">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                    Salvar Alterações
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
