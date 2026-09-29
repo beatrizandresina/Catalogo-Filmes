@@ -45,7 +45,6 @@
 
         <div class="col-md-8 col-lg-9 ps-md-4 ps-lg-5">
             <h1 class="fw-bold mb-1 display-5" style="letter-spacing: -1px; color: var(--text-primary);">@Model.Titulo</h1>
-            <p class="fs-5 mb-4" style="color: var(--text-muted);">Dirigido por <strong>@Model.Diretor</strong> &bull; @Model.AnoLancamento</p>
 
             <div class="d-flex flex-wrap gap-3 mb-4">
                 <span class="badge d-flex align-items-center px-3 py-2 rounded-pill" style="background-color: var(--bg-card); border: 1px solid var(--border-subtle); color: var(--text-primary); font-weight: 500; font-size: 0.9rem;">
@@ -75,6 +74,28 @@
                         <span class="small" style="color: var(--text-muted);">Nenhum gênero registrado.</span>
                     }
                     <a href="/Home/VincularGenero?filmeId=@Model.Id" class="badge rounded-pill px-3 py-2 text-decoration-none transition-hover" style="background-color: var(--bg-card); color: var(--brand-red); border: 1px dashed var(--border-subtle);">
+                        + Adicionar
+                    </a>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <strong class="me-2" style="color: var(--text-muted); font-weight: 500;">Equipe:</strong>
+                    @if (Model.Profissionais != null && Model.Profissionais.Any())
+                    {
+                        foreach (var equipe in Model.Profissionais)
+                        {
+                            <span class="badge rounded-pill px-3 py-2 fw-normal" style="background-color: transparent; border: 1px solid var(--border-subtle); color: var(--text-primary);">
+                                @equipe.Profissional.Nome <span style="color: var(--brand-red);">(@equipe.Funcao)</span>
+                            </span>
+                        }
+                    }
+                    else
+                    {
+                        <span class="small" style="color: var(--text-muted);">Nenhum profissional registrado.</span>
+                    }
+                    <a href="/Home/VincularProfissional?filmeId=@Model.Id" class="badge rounded-pill px-3 py-2 text-decoration-none transition-hover" style="background-color: var(--bg-card); color: var(--brand-red); border: 1px dashed var(--border-subtle);">
                         + Adicionar
                     </a>
                 </div>

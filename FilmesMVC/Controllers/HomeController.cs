@@ -56,6 +56,17 @@ namespace FilmesMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    var filmeCriado = await response.Content.ReadFromJsonAsync<FilmeViewModel>();
+
+                    if (filme.CapaArquivo != null && filmeCriado != null)
+                    {
+                        using var content = new MultipartFormDataContent();
+                        using var stream = filme.CapaArquivo.OpenReadStream();
+
+                        content.Add(new StreamContent(stream), "arquivo", filme.CapaArquivo.FileName);
+
+                        await cliente.PostAsync($"api/filme/{filmeCriado.Id}/capa", content);
+                    }
                     return RedirectToAction("Index");
                 }
             }
@@ -109,6 +120,15 @@ namespace FilmesMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    if (filme.CapaArquivo != null && filme.CapaArquivo.Length > 0)
+                    {
+                        using var content = new MultipartFormDataContent();
+                        using var stream = filme.CapaArquivo.OpenReadStream();
+
+                        content.Add(new StreamContent(stream), "arquivo", filme.CapaArquivo.FileName);
+
+                        await cliente.PostAsync($"api/filme/{filme.Id}/capa", content);
+                    }
                     return RedirectToAction("Detalhes", new { id = filme.Id });
                 }
                 return View(filme);
@@ -199,6 +219,40 @@ namespace FilmesMVC.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     return RedirectToAction("detalhes", new {id = filmeId});
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> VincularProfissional(int filmeId)
+        {
+            ViewBag.FilmeId = filmeId;
+            var profissionais = new List<ProfissionalViewModel>();
+
+            using (var cliente = new HttpClient())
+            {
+                cliente.BaseAddress = new Uri("http://localhost:5291/");
+                var response = await cliente.GetAsync($"api/profissional");
+                if (response.IsSuccessStatusCode)
+                {
+                    profissionais = await response.Content.ReadFromJsonAsync<List<ProfissionalViewModel>>();
+                }
+            }
+            return View(profissionais);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VincularProfissionalConfirmado(int filmeId, int profissionalId, string funcao)
+        {
+            using (var cliente = new HttpClient())
+            {
+                cliente.BaseAddress = new Uri("http://localhost:5291/");
+                var response = await cliente.PostAsync($"api/filme/{filmeId}/profissionais/{profissionalId}?funcao={funcao}", null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Detalhes", new { id = filmeId });
                 }
             }
             return RedirectToAction("Index");

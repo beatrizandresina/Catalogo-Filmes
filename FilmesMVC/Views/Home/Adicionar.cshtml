@@ -14,7 +14,7 @@
     </div>
 
     <div class="p-4 p-md-5 rounded-4" style="background-color: var(--bg-card);">
-        <form asp-action="Adicionar" method="post">
+        <form asp-action="Adicionar" method="post" enctype="multipart/form-data">
 
             <h5 class="text-primary mb-4" style="color: var(--brand-red) !important;">Informações Principais</h5>
 
@@ -22,10 +22,6 @@
                 <div class="col-md-6">
                     <label class="form-label text-muted fw-semibold small text-uppercase">Título do Filme <span class="text-danger">*</span></label>
                     <input asp-for="Titulo" class="form-control form-control-lg" required placeholder="Ex: O Poderoso Chefão" />
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label text-muted fw-semibold small text-uppercase">Diretor <span class="text-danger">*</span></label>
-                    <input asp-for="Diretor" class="form-control form-control-lg" required placeholder="Ex: Francis Ford Coppola" />
                 </div>
 
                 <div class="col-md-4">
@@ -64,8 +60,8 @@
 
             <div class="row g-4">
                 <div class="col-md-6">
-                    <label class="form-label text-muted fw-semibold small text-uppercase">URL da Capa (Pôster)</label>
-                    <input asp-for="CapaUrl" class="form-control form-control-lg" placeholder="https://..." />
+                    <label class="form-label text-muted fw-semibold small text-uppercase">Capa (Pôster)</label>
+                    <input asp-for="CapaArquivo" type="file" class="form-control form-control-lg text-white" style="background-color: var(--bg-dark); border-color: var(--border-subtle);" accept="image/*" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label text-muted fw-semibold small text-uppercase">URL do Trailer (YouTube)</label>

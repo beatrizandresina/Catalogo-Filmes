@@ -9,6 +9,6 @@ namespace APIFilmes.Models
         public string Nome { get; set; }
         [JsonIgnore]
         [ValidateNever]
-        public List<FilmeModel>? Filmes { get; set; }
+        public ICollection<FilmeModel> Filmes { get; set; } = new List<FilmeModel>();
     }
 }
