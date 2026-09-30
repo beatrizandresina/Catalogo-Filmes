@@ -6,6 +6,9 @@
 APIFilmes/wwwroot/capas/*
 !APIFilmes/wwwroot/capas/.gitkeep
 
+APIFilmes/wwwroot/fotosProfissionais/*
+!APIFilmes/wwwroot/fotosProfissionais/.gitkeep
+
 # User-specific files
 *.rsuser
 *.suo
