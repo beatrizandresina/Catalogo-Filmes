@@ -46,7 +46,22 @@
                         <h5 class="card-title fw-bold fs-6 mb-1 text-white text-truncate" title="@filme.Titulo">@filme.Titulo</h5>
 
                         @{
-                            var diretor = filme.Profissionais?.FirstOrDefault(p => p.Funcao == "Diretor")?.Profissional?.Nome ?? "Sem diretor";
+                            var listaDiretores = filme.Profissionais?
+                                                            .Where(predicate => predicate.Funcao == "Diretor")
+                                                            .Select(p => p.Profissional?.Nome)
+                                                            .ToList();
+                            string diretor = "Sem diretor";
+
+                            if(listaDiretores != null && listaDiretores.Any())
+                            {
+                                if(listaDiretores.Count > 1)
+                                {
+                                    diretor = listaDiretores.First() + ", ...";
+                                } else
+                                {
+                                    diretor = listaDiretores.First();
+                                }
+                            }
                         }
                         <h6 class="card-subtitle text-muted text-truncate" style="font-size: 0.8rem;" title="@diretor">@diretor</h6>
                     </div>

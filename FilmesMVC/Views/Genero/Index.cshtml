@@ -1,0 +1,39 @@
+﻿@model List<GeneroViewModel>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="mb-0 fw-bold">Gêneros</h1>
+        <a href="/Genero/Adicionar" class="btn btn-primary rounded-pill px-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-lg me-2 pb-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+            </svg>
+            Adicionar Gênero
+        </a>
+    </div>
+
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
+        @foreach (var genero in Model)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 rounded-4 shadow-sm" style="background-color: var(--bg-card);">
+                    <div class="card-body text-center d-flex flex-column justify-content-center p-4">
+
+                        <h5 class="fw-bold fs-5 mb-4 text-white text-truncate" title="@genero.Nome">
+                            @genero.Nome
+                        </h5>
+
+                        <div class="mt-auto d-flex justify-content-center gap-2">
+                            <a href="/Genero/Editar/@genero.Id" class="btn btn-sm rounded-pill px-3" style="background-color: #333; color: #fff; border: 1px solid #444;">
+                                Editar
+                            </a>
+                            <a href="/Genero/Excluir/@genero.Id" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                                Excluir
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

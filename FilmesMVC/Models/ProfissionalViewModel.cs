@@ -1,4 +1,6 @@
-﻿namespace FilmesMVC.Models
+﻿using System.Text.Json.Serialization;
+
+namespace FilmesMVC.Models
 {
     public class ProfissionalViewModel
     {
@@ -6,5 +8,7 @@
         public string Nome { get; set; }
         public string FotoUrl { get; set; }
         public List<FilmeProfissionalViewModel>? Filmes { get; set; } = new List<FilmeProfissionalViewModel>();
+        [JsonIgnore]
+        public IFormFile? FotoArquivo { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model FilmesMVC.Models.FilmeViewModel
+﻿@model FilmesMVC.Models.ProfissionalViewModel
 
 <div class="card p-5 mt-5 shadow-lg text-center rounded-4" style="background-color: var(--bg-card); border: 1px dashed #F94144 !important; max-width: 600px; margin: auto;">
 
@@ -10,15 +10,15 @@
     </div>
 
     <h2 style="color: #F94144;" class="fw-bold mb-3">Cuidado!</h2>
-    <h5 class="mb-4" style="color: var(--text-primary); line-height: 1.5;">Tem a certeza que deseja apagar o filme <br><strong>"@Model.Titulo"</strong>?</h5>
-    <p style="color: var(--text-muted);" class="mb-5">Esta ação é irreversível e o filme será removido permanentemente da base de dados.</p>
+    <h5 class="mb-4" style="color: var(--text-primary); line-height: 1.5;">Tem a certeza que deseja apagar o profissional <br><strong>"@Model.Nome"</strong>?</h5>
+    <p style="color: var(--text-muted);" class="mb-5">Esta ação é irreversível e o profissional será removido permanentemente da base de dados.</p>
 
     <form asp-action="Excluir" method="post">
         <input type="hidden" asp-for="Id" />
 
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 w-100 mt-4">
-            <a href="/Home/Detalhes/@Model.Id" class="btn btn-outline-secondary rounded-pill px-4 py-2 w-100">Cancelar</a>
-            <button type="submit" class="btn btn-danger rounded-pill px-4 py-2 shadow-sm w-100">Sim, apagar Filme!</button>
+            <a href="/Profissional/Index" class="btn btn-outline-secondary rounded-pill px-4 py-2 w-100">Cancelar</a>
+            <button type="submit" class="btn btn-danger rounded-pill px-4 py-2 shadow-sm w-100">Sim, apagar profissional!</button>
         </div>
     </form>
 </div>

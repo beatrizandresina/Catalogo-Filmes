@@ -33,8 +33,14 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Catálogo</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Sobre</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="navbarDropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: var(--brand-red);">
+                                Administração
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownAdmin">
+                                <li><a class="dropdown-item" href="/Profissional/Index">Gerenciar Profissionais</a></li>
+                                <li><a class="dropdown-item" href="/Genero/Index">Gerenciar Generos</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -51,7 +57,6 @@
         <div class="container py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <span>&copy; 2026 - Sistema de Catálogo de Filmes</span>
-                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none text-muted">Privacidade</a>
             </div>
         </div>
     </footer>

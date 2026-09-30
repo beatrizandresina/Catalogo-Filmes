@@ -44,7 +44,7 @@ namespace APIFilmes.Controllers
             }
             _context.Generos.Add(generoModel);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(BuscarGeneros), new { id = generoModel.Id }, generoModel);
+            return CreatedAtAction(nameof(BuscarGeneroPorId), new { id = generoModel.Id }, generoModel);
         }
 
         [HttpPut]
